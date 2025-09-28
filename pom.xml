@@ -15,9 +15,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>25</maven.compiler.source>
-        <maven.compiler.target>25</maven.compiler.target>
-        <spring.boot.verion>3.5.6</spring.boot.verion>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <spring.boot.verion>3.3.4</spring.boot.verion>
     </properties>
 
     <dependencyManagement>
@@ -44,7 +44,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring.boot.verion}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
