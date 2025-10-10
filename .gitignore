@@ -2,3 +2,4 @@
 /.idea/
 target/
 /customer-service/target/
+.env

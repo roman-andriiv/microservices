@@ -8,9 +8,9 @@ spring:
     ansi:
       enabled: ALWAYS
   datasource:
-    username: postgres
-    password: postgres
-    url: jdbc:postgresql://localhost:5432/customer
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:${DB_PORT}/customer
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
