@@ -11,13 +11,14 @@
     <url>http://maven.apache.org</url>
     <modules>
         <module>customer-service</module>
+        <module>fraud-service</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <spring.boot.verion>3.3.4</spring.boot.verion>
+        <spring.boot.verion>3.5.6</spring.boot.verion>
     </properties>
 
     <dependencyManagement>
@@ -45,6 +46,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.paulschwarz</groupId>
+            <artifactId>spring-dotenv</artifactId>
+            <version>4.0.0</version>
         </dependency>
     </dependencies>
 
