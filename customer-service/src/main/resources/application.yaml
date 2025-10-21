@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${CUSTOMER_SERVER_PORT}
 
 spring:
   application:
@@ -10,7 +10,7 @@ spring:
   datasource:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    url: jdbc:postgresql://localhost:${DB_PORT}/customer
+    url: jdbc:postgresql://${DB_SERVER_HOST}:${DB_SERVER_PORT}/customer
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
