@@ -12,6 +12,7 @@
     <modules>
         <module>customer-service</module>
         <module>fraud-service</module>
+        <module>eureka-server</module>
     </modules>
 
     <properties>
@@ -19,6 +20,8 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <spring.boot.verion>3.5.6</spring.boot.verion>
+        <spring.cloud.verion>2025.0.0</spring.cloud.verion>
+<!--        <spring.cloud.verion>2020.0.3</spring.cloud.verion>-->
     </properties>
 
     <dependencyManagement>
@@ -28,6 +31,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring.boot.verion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.verion}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -64,5 +75,15 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

@@ -8,23 +8,32 @@ import org.springframework.web.client.RestTemplate;
 @AllArgsConstructor
 public class CustomerService {
 
-    private final CustomerRepository customerRepository;
-    private final RestTemplate restTemplate;
+  private final CustomerRepository customerRepository;
+  private final RestTemplate restTemplate;
 
-    public void registerCustomer(CustomerRegistrationRequest request) {
-        Customer customer = Customer.builder().firstName(request.firstName()).lastName(request.lastName()).email(request.email()).build();
+  public void registerCustomer(CustomerRegistrationRequest request) {
+    Customer customer =
+        Customer.builder()
+            .firstName(request.firstName())
+            .lastName(request.lastName())
+            .email(request.email())
+            .build();
 
-        //todo: check if email is valid
-        //todo: check if email is not taken already
+    // todo: check if email is valid
+    // todo: check if email is not taken already
 
-        customerRepository.saveAndFlush(customer);
+    customerRepository.saveAndFlush(customer);
 
-        //todo: check if customer is fraudster
-        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject("http://localhost:8081/api/v1/fraud-check/{customerId}", FraudCheckResponse.class, customer.getId());
+    // todo: check if customer is fraudster
+    FraudCheckResponse fraudCheckResponse =
+        restTemplate.getForObject(
+            "http://FRAUD-SERVICE/api/v1/fraud-check/{customerId}",
+            FraudCheckResponse.class,
+            customer.getId());
 
-        if (fraudCheckResponse.isFraudster()) {
-            throw new IllegalStateException("Customer is fraudster");
-        }
-        //todo: send notification
+    if (fraudCheckResponse.isFraudster()) {
+      throw new IllegalStateException("Customer is fraudster");
     }
+    // todo: send notification
+  }
 }
