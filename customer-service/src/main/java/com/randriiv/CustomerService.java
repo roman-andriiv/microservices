@@ -2,17 +2,18 @@ package com.randriiv;
 
 import com.andriiv.clients.fraud.FraudCheckResponse;
 import com.andriiv.clients.fraud.FraudClient;
+import com.andriiv.clients.notification.NotificationClient;
+import com.andriiv.clients.notification.NotificationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 @AllArgsConstructor
 public class CustomerService {
 
   private final CustomerRepository customerRepository;
-  private final RestTemplate restTemplate;
   private final FraudClient fraudClient;
+  private final NotificationClient notificationClient;
 
   public void registerCustomer(CustomerRegistrationRequest request) {
     Customer customer =
@@ -27,13 +28,16 @@ public class CustomerService {
 
     customerRepository.saveAndFlush(customer);
 
-    // todo: check if customer is fraudster
-    FraudCheckResponse fraudCheckResponse =
-        fraudClient.isFraudster(customer.getId());
+    FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
 
     if (fraudCheckResponse.isFraudster()) {
       throw new IllegalStateException("Customer is fraudster");
     }
-    // todo: send notification
+
+    notificationClient.sentNotification(
+        new NotificationRequest(
+            customer.getId(),
+            customer.getEmail(),
+            String.format("Hi %s, its Roman Andriiv", customer.getFirstName())));
   }
 }
