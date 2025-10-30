@@ -19,12 +19,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <!--        <spring.boot.verion>3.5.6</spring.boot.verion>-->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <spring.boot.verion>2.5.7</spring.boot.verion>
-        <!--        <spring.cloud.verion>2025.0.0</spring.cloud.verion>-->
         <spring.cloud.verion>2020.0.3</spring.cloud.verion>
+        <!--        <spring.boot.verion>3.5.6</spring.boot.verion>-->
+        <!--        <spring.cloud.verion>2025.0.0</spring.cloud.verion>-->
     </properties>
 
     <dependencyManagement>

@@ -20,6 +20,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+  zipkin:
+    base-url: http://${ZIPKIN_SERVER_HOST}:${ZIPKIN_SERVER_PORT}
 
 eureka:
   client:
