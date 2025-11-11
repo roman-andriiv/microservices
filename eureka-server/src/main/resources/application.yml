@@ -1,13 +1,16 @@
+server:
+  port: ${EUREKA_SERVER_PORT}
+
 spring:
   application:
     name: eureka-server
   zipkin:
     base-url: http://${ZIPKIN_SERVER_HOST}:${ZIPKIN_SERVER_PORT}
 
-server:
-  port: ${EUREKA_SERVER_PORT}
-
 eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
+  instance:
+    prefer-ip-address: false
+    hostname: ${EUREKA_SERVER_HOST}
