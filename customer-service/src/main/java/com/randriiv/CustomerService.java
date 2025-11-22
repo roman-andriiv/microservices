@@ -1,9 +1,9 @@
 package com.randriiv;
 
-import com.andriiv.clients.fraud.FraudCheckResponse;
-import com.andriiv.clients.fraud.FraudClient;
-import com.andriiv.clients.notification.NotificationClient;
-import com.andriiv.clients.notification.NotificationRequest;
+import com.randriiv.amqp.RabbitMqMessageProducer;
+import com.randriiv.clients.fraud.FraudCheckResponse;
+import com.randriiv.clients.fraud.FraudClient;
+import com.randriiv.clients.notification.NotificationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class CustomerService {
 
   private final CustomerRepository customerRepository;
   private final FraudClient fraudClient;
-  private final NotificationClient notificationClient;
+  private final RabbitMqMessageProducer rabbitMqMessageProducer;
 
   public void registerCustomer(CustomerRegistrationRequest request) {
     Customer customer =
@@ -34,10 +34,13 @@ public class CustomerService {
       throw new IllegalStateException("Customer is fraudster");
     }
 
-    notificationClient.sentNotification(
+    NotificationRequest notificationRequest =
         new NotificationRequest(
             customer.getId(),
             customer.getEmail(),
-            String.format("Hi %s, its Roman Andriiv", customer.getFirstName())));
+            String.format("Hi %s, its Roman Andriiv", customer.getFirstName()));
+
+    rabbitMqMessageProducer.publish(
+        notificationRequest, "internal.exchange", "internal.notification.routing-key");
   }
 }

@@ -1,4 +1,4 @@
-package com.andriiv.clients.fraud;
+package com.randriiv.clients.fraud;
 
 public record FraudCheckResponse(Boolean isFraudster) {
 }

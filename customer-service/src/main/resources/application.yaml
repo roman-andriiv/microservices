@@ -22,6 +22,8 @@ spring:
     show-sql: true
   zipkin:
     base-url: http://${ZIPKIN_SERVER_HOST}:${ZIPKIN_SERVER_PORT}
+  rabbitmq:
+    addresses: ${RABBITMQ_HOST}:${RABBITMQ_PORT}
 
 eureka:
   client:

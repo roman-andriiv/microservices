@@ -1,4 +1,4 @@
-package com.andriiv.clients.notification;
+package com.randriiv.clients.notification;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

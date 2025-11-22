@@ -1,6 +1,6 @@
 package com.randriiv;
 
-import com.andriiv.clients.fraud.FraudCheckResponse;
+import com.randriiv.clients.fraud.FraudCheckResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

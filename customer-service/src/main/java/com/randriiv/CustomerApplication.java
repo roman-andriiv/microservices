@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.randriiv.amqp", "com.randriiv"})
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.andriiv.clients")
+@EnableFeignClients(basePackages = "com.randriiv.clients")
 public class CustomerApplication {
   public static void main(String[] args) {
-        SpringApplication.run(CustomerApplication.class, args);
+    SpringApplication.run(CustomerApplication.class, args);
   }
 }

@@ -1,4 +1,4 @@
-package com.andriiv.clients.fraud;
+package com.randriiv.clients.fraud;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

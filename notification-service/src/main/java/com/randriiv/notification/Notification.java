@@ -1,4 +1,4 @@
-package com.andriiv;
+package com.randriiv.notification;
 
 import java.time.LocalDateTime;
 import javax.persistence.*;

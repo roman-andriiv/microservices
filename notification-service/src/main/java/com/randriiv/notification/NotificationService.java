@@ -1,6 +1,6 @@
-package com.andriiv;
+package com.randriiv.notification;
 
-import com.andriiv.clients.notification.NotificationRequest;
+import com.randriiv.clients.notification.NotificationRequest;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

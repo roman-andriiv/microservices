@@ -1,4 +1,4 @@
-package com.andriiv;
+package com.randriiv.notification;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
