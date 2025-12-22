@@ -3,3 +3,5 @@
 target/
 /customer-service/target/
 .env
+/.env.docker
+/.env

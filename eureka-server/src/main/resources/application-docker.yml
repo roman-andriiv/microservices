@@ -9,5 +9,7 @@ spring:
 
 eureka:
   client:
+    service-url:
+      defaultZone: http://${EUREKA_SERVER_HOST}:${EUREKA_SERVER_PORT}/eureka
     fetch-registry: false
     register-with-eureka: false

@@ -2,7 +2,7 @@ services:
   postgres:
     container_name: postgres
     image: postgres
-    env_file: .env
+    env_file: .env.docker
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -18,7 +18,7 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
-    env_file: .env
+    env_file: .env.docker
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
@@ -34,18 +34,104 @@ services:
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
+    env_file: .env.docker
     ports:
       - "9411:9411"
+    networks:
+      - spring
 
   rabbitmq:
     image: rabbitmq:3.9-management-alpine
     container_name: rabbitmq
+    env_file: .env.docker
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - spring
+
+  eureka-server:
+    image: romanandriiv/eureka-server
+    container_name: eureka-server
+    env_file: .env.docker
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8761:8761"
+    depends_on:
+      - zipkin
+    networks:
+      - spring
+
+  api-gateway:
+    image: romanandriiv/api-gateway
+    env_file: .env.docker
+    container_name: api-gateway
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8083:8083"
+    depends_on:
+      - zipkin
+      - eureka-server
+    networks:
+      - spring
+
+  customer-service:
+    image: romanandriiv/customer-service
+    container_name: customer-service
+    env_file: .env.docker
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      - zipkin
+      - eureka-server
+      - postgres
+      - rabbitmq
+    networks:
+      - spring
+      - postgres
+
+  fraud-service:
+    image: romanandriiv/fraud-service
+    container_name: fraud-service
+    env_file: .env.docker
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8081:8081"
+    depends_on:
+      - zipkin
+      - eureka-server
+      - postgres
+      - rabbitmq
+    networks:
+      - spring
+      - postgres
+
+  notification-service:
+    image: romanandriiv/notification-service
+    container_name: notification-service
+    env_file: .env.docker
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8082:8082"
+    depends_on:
+      - zipkin
+      - eureka-server
+      - postgres
+      - rabbitmq
+    networks:
+      - spring
+      - postgres
 
 networks:
   postgres:
+    driver: bridge
+  spring:
     driver: bridge
 
 volumes:
