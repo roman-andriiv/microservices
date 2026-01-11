@@ -29,6 +29,7 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${EUREKA_SERVER_PORT}/eureka
     fetch-registry: true
     register-with-eureka: true
+    enabled: false
   instance:
     prefer-ip-address: false
     hostname: ${EUREKA_SERVER_HOST}
